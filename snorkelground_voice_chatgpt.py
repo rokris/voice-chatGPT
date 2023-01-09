@@ -38,14 +38,14 @@ def suppress_stdout():
     with open(os.devnull, "w") as devnull:
         old_stdout = sys.stdout
         sys.stdout = devnull
-        try:  
+        try:
             yield
         finally:
             sys.stdout = old_stdout
 
 def get_audio_input():
-    """Prompts the user to speak into the microphone and records their input. 
-    Prints 'Listening... (press ctrl+c to stop)' while it is listening, and 'Listening is stopped' when it is finished. 
+    """Prompts the user to speak into the microphone and records their input.
+    Prints 'Listening... (press ctrl+c to stop)' while it is listening, and 'Listening is stopped' when it is finished.
     Returns the recorded audio."""
     with sr.Microphone() as source:
         print('Listening... (press ctrl+c to stop)')
@@ -55,7 +55,7 @@ def get_audio_input():
     return audio
 
 def recognize_speech(audio):
-    """Takes in recorded audio and attempts to recognize it using Google's speech recognition API. 
+    """Takes in recorded audio and attempts to recognize it using Google's speech recognition API.
     Returns the recognized text if successful, or an error message if unsuccessful."""
     try:
         with suppress_stdout():
@@ -67,7 +67,7 @@ def recognize_speech(audio):
         return "Error processing request: {e}"
 
 def generate_response(prompt):
-    """Takes in a prompt string and uses OpenAI's GPT-3 model to generate a response. 
+    """Takes in a prompt string and uses OpenAI's GPT-3 model to generate a response.
     Returns the generated response as a string."""
     response = openai.Completion.create(
         engine="text-davinci-003", prompt=prompt, max_tokens=1000
@@ -77,8 +77,8 @@ def generate_response(prompt):
     return response_text
 
 def main():
-    """Main function for the chatbot. 
-    Initializes the chatbot, prompts the user for input, generates a response, prints and speaks the response, and appends the response to the conversation history. 
+    """Main function for the chatbot.
+    Initializes the chatbot, prompts the user for input, generates a response, prints and speaks the response, and appends the response to the conversation history.
     Repeats this process in an infinite loop."""
     initialize()
     conversation = ""
@@ -100,6 +100,6 @@ def main():
 
         engine.say(response_text)
         engine.runAndWait()
-        
+
 if __name__ == "__main__":
     main()
