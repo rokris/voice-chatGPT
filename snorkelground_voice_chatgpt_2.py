@@ -51,12 +51,14 @@ def recognize_speech(audio):
         try:
             user_input = None
             old_stdout = sys.stdout
-            sys.stdout = devnull    
+            sys.stdout = devnull
             user_input = recognizer.recognize_google(
                 audio, language="no-NO", show_all=False
             )
-        except:
-            return "Noe gikk galt!"
+        except sr.UnknownValueError:
+            return "Sorry, I could not recognize your voice!"
+        except sr.RequestError:
+            return "Error processing request!"
         finally:
             sys.stdout = old_stdout
             return user_input
