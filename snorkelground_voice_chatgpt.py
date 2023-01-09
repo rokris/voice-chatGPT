@@ -14,8 +14,9 @@ import openai
 import api_secret
 
 """
-api_secret.py must be created and secret key variabel must be collected from OpenAI and stored.py
-Example content in the file:
+An api_secret.py must be create.
+The secret API key variabel must be collected from OpenAI and entered into the file.
+Example:
 API_KEY="sk-EJMxtwerwera0werwerwegYbkFBpgmwerwerFuCPxuH1TSz"
 """
 openai.api_key = api_secret.API_KEY
