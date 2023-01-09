@@ -1,4 +1,3 @@
-pytest
 pyttsx3
 SpeechRecognition
 PyAudio
