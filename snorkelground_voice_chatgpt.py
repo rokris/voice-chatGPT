@@ -68,8 +68,8 @@ def recognize_speech(audio):
         return user_input
     except sr.UnknownValueError:
         return "Sorry, I could not recognize your voice!"
-    except sr.RequestError as exeptmessage:
-        return "Error processing request: {exeptmessage}"
+    except sr.RequestError:
+        return "Error processing request!"
 
 
 def generate_response(prompt):
