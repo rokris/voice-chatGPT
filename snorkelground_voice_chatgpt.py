@@ -16,8 +16,6 @@ import api_secret
 """
 An api_secret.py must be create.
 The secret API key variabel must be collected from OpenAI and entered into the file.
-Example:
-API_KEY="sk-EJMxtwerwera0werwerwegYbkFBpgmwerwerFuCPxuH1TSz"
 """
 openai.api_key = api_secret.API_KEY
 
@@ -45,7 +43,8 @@ def suppress_stdout():
 
 def get_audio_input():
     """Prompts the user to speak into the microphone and records their input.
-    Prints 'Listening... (press ctrl+c to stop)' while it is listening, and 'Listening is stopped' when it is finished.
+    Prints 'Listening... (press ctrl+c to stop)' while it is listening, and 
+    'Listening is stopped' when it is finished.
     Returns the recorded audio."""
     with sr.Microphone() as source:
         print('Listening... (press ctrl+c to stop)')
@@ -63,8 +62,8 @@ def recognize_speech(audio):
         return user_input
     except sr.UnknownValueError:
         return "Sorry, I could not recognize your voice!"
-    except sr.RequestError as e:
-        return "Error processing request: {e}"
+    except sr.RequestError as exeptmessage:
+        return "Error processing request: {exeptmessage}"
 
 def generate_response(prompt):
     """Takes in a prompt string and uses OpenAI's GPT-3 model to generate a response.
@@ -78,7 +77,8 @@ def generate_response(prompt):
 
 def main():
     """Main function for the chatbot.
-    Initializes the chatbot, prompts the user for input, generates a response, prints and speaks the response, and appends the response to the conversation history.
+    Initializes the chatbot, prompts the user for input, generates a response,
+    prints and speaks the response, and appends the response to the conversation history.
     Repeats this process in an infinite loop."""
     initialize()
     conversation = ""
