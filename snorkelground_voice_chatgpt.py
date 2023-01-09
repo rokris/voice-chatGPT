@@ -50,7 +50,7 @@ def get_audio_input():
     "Listening is stopped" when it is finished.
     Returns the recorded audio."""
     with sr.Microphone() as source:
-        print('Listening... (press ctrl+c to stop)')
+        print("Listening... (press ctrl+c to stop)")
         recognizer.adjust_for_ambient_noise(source, duration=1)
         audio = recognizer.listen(source)
     print("Listening is stopped")
