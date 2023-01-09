@@ -4,14 +4,14 @@ The chatbot prompts the user for input, generates a response using the user's in
 and conversation history, prints and speaks the response.
 """
 
-from contextlib import contextmanager
 import os
 import sys
-import pyttsx3
-import speech_recognition as sr
-import openai
+from contextlib import contextmanager
 
 import api_secret
+import openai
+import pyttsx3
+import speech_recognition as sr
 
 """
 An api_secret.py must be create.
@@ -22,6 +22,7 @@ openai.api_key = api_secret.API_KEY
 engine = None
 recognizer = None
 
+
 def initialize():
     """Initializes the pyttsx3 engine and speech_recognition recognizer global variables.
     These variables are only initialized if they have not been initialized before."""
@@ -29,6 +30,7 @@ def initialize():
     if engine is None and recognizer is None:
         engine = pyttsx3.init()
         recognizer = sr.Recognizer()
+
 
 @contextmanager
 def suppress_stdout():
@@ -41,29 +43,34 @@ def suppress_stdout():
         finally:
             sys.stdout = old_stdout
 
+
 def get_audio_input():
     """Prompts the user to speak into the microphone and records their input.
-    Prints 'Listening... (press ctrl+c to stop)' while it is listening, and 
-    'Listening is stopped' when it is finished.
+    Prints "Listening... (press ctrl+c to stop)" while it is listening, and
+    "Listening is stopped" when it is finished.
     Returns the recorded audio."""
     with sr.Microphone() as source:
         print('Listening... (press ctrl+c to stop)')
         recognizer.adjust_for_ambient_noise(source, duration=1)
         audio = recognizer.listen(source)
-    print('Listening is stopped')
+    print("Listening is stopped")
     return audio
+
 
 def recognize_speech(audio):
     """Takes in recorded audio and attempts to recognize it using Google's speech recognition API.
     Returns the recognized text if successful, or an error message if unsuccessful."""
     try:
         with suppress_stdout():
-            user_input = recognizer.recognize_google(audio, language="no-NO", show_all=False)
+            user_input = recognizer.recognize_google(
+                audio, language="no-NO", show_all=False
+            )
         return user_input
     except sr.UnknownValueError:
         return "Sorry, I could not recognize your voice!"
     except sr.RequestError as exeptmessage:
         return "Error processing request: {exeptmessage}"
+
 
 def generate_response(prompt):
     """Takes in a prompt string and uses OpenAI's GPT-3 model to generate a response.
@@ -74,6 +81,7 @@ def generate_response(prompt):
     response_text = response["choices"][0]["text"].replace("\n", "")
     response_text = response_text.split("Snorkeladmin:", 1)[0]
     return response_text
+
 
 def main():
     """Main function for the chatbot.
@@ -100,6 +108,7 @@ def main():
 
         engine.say(response_text)
         engine.runAndWait()
+
 
 if __name__ == "__main__":
     main()
