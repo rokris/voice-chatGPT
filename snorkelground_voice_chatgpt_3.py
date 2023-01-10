@@ -12,7 +12,6 @@ import openai
 import speech_recognition as sr
 from google.cloud import texttospeech
 
-
 """
 An api_secret.py must be create.
 The secret API key variabel must be collected from OpenAI and entered into the file.
@@ -30,7 +29,9 @@ def initialize():
     global engine, recognizer, ttsclient
     if recognizer is None and ttsclient is None:
         recognizer = sr.Recognizer()
-        ttsclient = texttospeech.TextToSpeechClient(client_options={"api_key": GOOGLE_API_KEY})
+        ttsclient = texttospeech.TextToSpeechClient(
+            client_options={"api_key": GOOGLE_API_KEY}
+        )
 
 
 def get_audio_input():
@@ -108,7 +109,7 @@ def main():
         voice = texttospeech.VoiceSelectionParams(
             language_code="nb-NO",
             ssml_gender=texttospeech.SsmlVoiceGender.MALE,
-            name="nb-NO-Wavenet-D"
+            name="nb-NO-Wavenet-D",
         )
         # Select the type of audio file you want returned
         audio_config = texttospeech.AudioConfig(
