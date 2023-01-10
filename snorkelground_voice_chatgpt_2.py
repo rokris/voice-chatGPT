@@ -48,9 +48,9 @@ def recognize_speech(audio):
     """Takes in recorded audio and attempts to recognize it using Google's speech recognition API.
     Returns the recognized text if successful, or an error message if unsuccessful."""
     with open(os.devnull, "w") as devnull:
+        user_input = None
+        old_stdout = sys.stdout
         try:
-            user_input = None
-            old_stdout = sys.stdout
             sys.stdout = devnull
             user_input = recognizer.recognize_google(
                 audio, language="no-NO", show_all=False
