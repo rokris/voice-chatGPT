@@ -105,10 +105,10 @@ def main():
 
         # Set the text input to be synthesized
         synthesis_input = texttospeech.SynthesisInput(text=response_text)
-        # Build the voice request, select the language code ("en-US") and the ssml
-        # voice gender ("neutral")
         voice = texttospeech.VoiceSelectionParams(
-            language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+            language_code="nb-NO",
+            ssml_gender=texttospeech.SsmlVoiceGender.MALE,
+            name="nb-NO-Wavenet-D"
         )
         # Select the type of audio file you want returned
         audio_config = texttospeech.AudioConfig(
