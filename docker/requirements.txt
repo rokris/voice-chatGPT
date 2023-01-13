@@ -2,3 +2,5 @@ pyttsx3
 SpeechRecognition
 PyAudio
 openai
+setuptools
+wheel
