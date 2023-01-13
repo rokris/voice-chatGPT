@@ -38,9 +38,7 @@ def get_audio_input():
     Returns the recorded audio."""
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source, duration=1)
-        print(
-            "Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)"
-        )
+        print("Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)")
         audio = recognizer.listen(source)
     print("Mikrofonen er slått av igjen...")
     return audio
