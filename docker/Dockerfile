@@ -1,7 +1,6 @@
 FROM python:3.10-slim
 COPY . /app
 WORKDIR /app
-#RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN apt-get update && \
 apt-get install -y \
 alsa-utils=1.2.4-1 \
