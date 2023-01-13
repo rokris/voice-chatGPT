@@ -54,7 +54,7 @@ docker run --rm -it -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoi
 ```
 
 ---
-## Test av lyd fra lokal MAC
+## Test sound from lokal MAC
 ```
 paplay ~/Downloads/test.wav
 ```
