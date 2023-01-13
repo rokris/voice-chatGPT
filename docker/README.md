@@ -13,13 +13,13 @@ With this chatbot, you can have a conversation with it just like you would with 
 
 ---
 ## Build Docker images
-```
+```bash
 docker build -t snorkelground_voice_chatgpt .
 ```
 
 ---
 ## Install PulseAudio
-```
+```bash
 brew install pulseaudio
 nano /usr/local/Cellar/pulseaudio/14.2/etc/pulse/default.pa
     ### Network access (may be configured with paprefs, so leave this commented
@@ -29,7 +29,7 @@ nano /usr/local/Cellar/pulseaudio/14.2/etc/pulse/default.pa
 ```
 ---
 ## Start the PulseAudio on the MAC
-```
+```bash
 pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon -vvvv
 pulseaudio --check -v
 pactl list short sinks
@@ -37,29 +37,29 @@ pactl list short sinks
 
 ---
 ## Stop PulseAudio on the MAC
-```
+```bash
 pulseaudio --kill
 ```
 
 ---
 ## Run the Docker from MAC
-```
+```bash
 docker run --rm -it -v ~/.config/pulse:/home/pulseaudio/.config/pulse snorkelground_voice_chatgpt
 ```
 
 ---
 ## Test from inside Docker
-```
+```bash
 docker run --rm -it -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoint "/bin/bash" snorkelground_voice_chatgpt
 ```
 
 ---
 ## Test sound from lokal MAC
-```
+```bash
 paplay ~/Downloads/test.wav
 ```
 
-```
+```bash
 Test results:
         speaker-test 1.2.8
 
