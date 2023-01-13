@@ -6,7 +6,6 @@ and conversation history, prints and speaks the response.
 
 import os
 import sys
-from contextlib import contextmanager
 
 import api_secret
 import openai
@@ -30,18 +29,6 @@ def initialize():
     if engine is None and recognizer is None:
         engine = pyttsx3.init()
         recognizer = sr.Recognizer()
-
-
-@contextmanager
-def suppress_stdout():
-    """A context manager that temporarily suppresses stdout."""
-    with open(os.devnull, "w") as devnull:
-        old_stdout = sys.stdout
-        sys.stdout = devnull
-        try:
-            yield
-        finally:
-            sys.stdout = old_stdout
 
 
 def get_audio_input():
