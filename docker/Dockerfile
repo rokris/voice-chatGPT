@@ -15,12 +15,13 @@ portaudio19-dev \
 
 RUN pip install -r requirements.txt
 RUN rm -rf /var/lib/apt/lists/*
-RUN /bin/sh -c 'useradd --create-home --home-dir $HOME pulseaudio && usermod -aG audio,pulse,pulse-access pulseaudio && chown -R pulseaudio:pulseaudio $HOME'
+RUN /bin/sh -c 'useradd --create-home --home-dir $HOME pulseaudio && \
+usermod -aG audio,pulse,pulse-access pulseaudio && \
+chown -R pulseaudio:pulseaudio $HOME && chmod +x /app/start_voice_chatgpt.sh'
 
 WORKDIR /home/pulseaudio
 USER pulseaudio
 ENV HOME=/home/pulseaudio
 ENV PULSE_SERVER=docker.for.mac.localhost
 
-ENTRYPOINT ["python"]
-CMD ["/app/snorkelground_voice_chatgpt.py"]
+ENTRYPOINT ["/app/start_voice_chatgpt.sh"]

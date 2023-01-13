@@ -6,6 +6,7 @@ and conversation history, prints and speaks the response.
 
 import os
 import sys
+from contextlib import contextmanager
 
 import api_secret
 import openai
@@ -31,15 +32,28 @@ def initialize():
         recognizer = sr.Recognizer()
 
 
+@contextmanager
+def suppress_stdout():
+    """A context manager that temporarily suppresses stdout."""
+    with open(os.devnull, "w") as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:
+            yield
+        finally:
+            sys.stdout = old_stdout
+
+
 def get_audio_input():
     """Prompts the user to speak into the microphone and records their input.
     Prints "Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)"
     while it is listening, and "Mikrofonen er slått av igjen..." when it is finished.
     Returns the recorded audio."""
-    with sr.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration=1)
-        print("Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)")
-        audio = recognizer.listen(source)
+    print("Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)")
+    with suppress_stdout():
+        with sr.Microphone() as source:
+            recognizer.adjust_for_ambient_noise(source, duration=1)
+            audio = recognizer.listen(source)
     print("Mikrofonen er slått av igjen...")
     return audio
 
