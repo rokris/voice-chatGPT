@@ -36,7 +36,6 @@ def get_audio_input():
     Prints "Mikrofonen er aktiv... (si ordet 'avbryt' for å avslutte programmet)"
     while it is listening, and "Mikrofonen er slått av igjen..." when it is finished.
     Returns the recorded audio."""
-    #with suppress_stdout():
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print(
