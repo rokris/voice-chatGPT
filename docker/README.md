@@ -28,7 +28,7 @@ nano /usr/local/Cellar/pulseaudio/14.2/etc/pulse/default.pa
     load-module module-native-protocol-tcp
 ```
 ---
-## Start the PulseAudio on MAC
+## Start the PulseAudio on the MAC
 ```
 pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon -vvvv
 pulseaudio --check -v
@@ -36,7 +36,7 @@ pactl list short sinks
 ```
 
 ---
-## Stop PulseAudio på MAC
+## Stop PulseAudio on the MAC
 ```
 pulseaudio --kill
 ```
